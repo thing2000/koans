@@ -31,6 +31,54 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  roll_score = 0
+  
+  dice_sides = [0,0,0,0,0,0]
+
+  dice.each do |item|
+    if item == 1
+      dice_sides[0] += 1
+    elsif item == 2
+      dice_sides[1] += 1
+    elsif item == 3
+      dice_sides[2] += 1
+    elsif item == 4
+      dice_sides[3] += 1
+    elsif item == 5
+      dice_sides[4] += 1
+    elsif item == 6
+      dice_sides[5] +=1
+    end      
+  end
+
+  if dice_sides[0] >= 3
+    roll_score += 1000  
+  elsif dice_sides[1] >= 3
+    roll_score += 200
+  elsif dice_sides[2] >= 3
+    roll_score += 300
+  elsif dice_sides[3] >= 3
+    roll_score += 400
+  elsif dice_sides[4] >= 3
+    roll_score += 500
+  elsif dice_sides[5] >= 3
+    roll_score += 600
+  end
+
+  if dice_sides[0] < 3 && dice_sides[0] > 0
+    roll_score += dice_sides[0] * 100
+  elsif dice_sides[0] > 3 && dice_sides <= 5
+    roll_score += (dice_sides[0] - 3) * 100
+  end
+
+  if dice_sides[4] < 3 && dice_sides[4] > 0
+    roll_score += dice_sides[4] * 50
+  elsif dice_sides[4] > 3 && dice_sides[4] <= 5
+    roll_score += (dice_sides[4] - 3) * 50
+  end
+
+  roll_score
+
 end
 
 class AboutScoringProject < EdgeCase::Koan
